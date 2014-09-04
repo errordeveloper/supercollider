@@ -217,7 +217,7 @@ if (SC_WII OR APPLE)
 endif()
 
 if (Boost_FOUND)
-	target_link_libraries(libsclang ${Boost_THREAD_LIBRARY} ${Boost_SYSTEM_LIBRARY} ${Boost_REGEX_LIBRARY} ${Boost_FILESYSTEM_LIBRARY})
+	target_link_libraries(libsclang ${Boost_THREAD_LIBRARY} ${Boost_SYSTEM_LIBRARY} ${Boost_REGEX_LIBRARY} ${Boost_FILESYSTEM_LIBRARY} ${Boost_ATOMIC_LIBRARY})
 endif()
 
 if (SCLANG_SERVER)
