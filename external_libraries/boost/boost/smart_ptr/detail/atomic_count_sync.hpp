@@ -34,15 +34,16 @@ public:
     long operator++()
     {
     #ifdef __ARM_ARCH_7A__
-           int v1, tmp;
-           asm volatile ("1:                 \n\t"
-                         "ldrex   %0, %1     \n\t"
-                         "add     %0 ,%0, #1 \n\t"
-                         "strex   %2, %0, %1 \n\t"
-                         "cmp     %2, #0     \n\t"
-                         "bne     1b         \n\t"
-                         : "=&r" (v1), "+Q"(value_), "=&r"(tmp)
-                        );
+        int v1, tmp;
+        asm volatile ("1:                 \n\t"
+                      "ldrex   %0, %1     \n\t"
+                      "add     %0 ,%0, #1 \n\t"
+                      "strex   %2, %0, %1 \n\t"
+                      "cmp     %2, #0     \n\t"
+                      "bne     1b         \n\t"
+                      : "=&r" (v1), "+Q"(value_), "=&r"(tmp)
+                     );
+        return value_;
     #else
         return __sync_add_and_fetch( &value_, 1 );
     #endif
@@ -51,16 +52,16 @@ public:
     long operator--()
     {
     #ifdef __ARM_ARCH_7A__
-           int v1, tmp;
-           asm volatile ("1:                 \n\t"
-                         "ldrex   %0, %1     \n\t"
-                         "sub     %0 ,%0, #1 \n\t"
-                         "strex   %2, %0, %1 \n\t"
-                         "cmp     %2, #0     \n\t"
-                         "bne     1b         \n\t"
-                         : "=&r" (v1), "+Q"(value_), "=&r"(tmp)
-                        );
-           return value_;
+        int v1, tmp;
+        asm volatile ("1:                 \n\t"
+                      "ldrex   %0, %1     \n\t"
+                      "sub     %0 ,%0, #1 \n\t"
+                      "strex   %2, %0, %1 \n\t"
+                      "cmp     %2, #0     \n\t"
+                      "bne     1b         \n\t"
+                      : "=&r" (v1), "+Q"(value_), "=&r"(tmp)
+                     );
+        return value_;
     #else
         return __sync_add_and_fetch( &value_, -1 );
     #endif
@@ -69,7 +70,7 @@ public:
     operator long() const
     {
     #if __ARM_ARCH_7A__
-            return value_;
+        return value_;
     #else
         return __sync_fetch_and_add( &value_, 0 );
     #endif
