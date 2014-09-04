@@ -46,7 +46,7 @@ ADD_CUSTOM_TARGET(uninstall
 if (${CMAKE_COMPILER_IS_GNUCXX})
 	exec_program(${CMAKE_CXX_COMPILER} ARGS -dumpversion OUTPUT_VARIABLE _gcc_version)
 
-	add_definitions("-fschedule-insns2" "-fomit-frame-pointer")
+	add_definitions("-fomit-frame-pointer")
 
 	add_definitions("-Wreturn-type")
 
